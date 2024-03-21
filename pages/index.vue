@@ -1,5 +1,5 @@
 <template>
-
+  <NuxtLayout name="default">
     <Section
       title="Featured State: Bavaria"
       paragraph="Discover Bavaria's rich culture, breathtaking landscapes, and historic landmarks, including the fairy-tale Neuschwanstein Castle and the bustling city of Munich."
@@ -12,15 +12,13 @@
       title="Cultural Highlights"
       paragraph="Engage with Germany's diverse cultural offerings, from Oktoberfest in Munich to the classical music scene in Leipzig and cutting-edge art in Berlin."
     />
-
+  </NuxtLayout>
 </template>
 
-<script>
-import Section from "@/components/Section.vue";
+<script lang="ts" setup>
+const runtimeConfig = useRuntimeConfig();
+import { useAuth } from "#imports";
+// import FormData from 'form-data'
 
-export default {
-  components: {
-    Section,
-  },
-};
+const { token } = useAuth();
 </script>

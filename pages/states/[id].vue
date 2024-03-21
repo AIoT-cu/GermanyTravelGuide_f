@@ -1,4 +1,5 @@
 <template>
+  <NuxtLayout name="default">
     <div class="container mx-auto p-4">
       <h1 class="text-2xl font-bold mb-4">State Details</h1>
       <div v-if="state" class="bg-white p-4 rounded shadow">
@@ -11,6 +12,7 @@
         <p>State not found or loading...</p>
       </div>
     </div>
+  </NuxtLayout>
   </template>
   
   <script setup>

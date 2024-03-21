@@ -2,7 +2,9 @@
   <NuxtLayout name="login">
     <div class="container mx-auto p-4 max-w-sm">
       <h1 class="text-xl font-bold mb-4">Login</h1>
-      <form @submit.prevent="login">
+      <form
+        @submit.prevent="signIn({ username, password }, { callbackUrl: '/' })"
+      >
         <div class="mb-4">
           <label
             for="username"
@@ -10,7 +12,7 @@
             >Username</label
           >
           <input
-            v-model="credentials.username"
+            v-model="username"
             id="username"
             type="text"
             placeholder="Username"
@@ -25,7 +27,7 @@
             >Password</label
           >
           <input
-            v-model="credentials.password"
+            v-model="password"
             id="password"
             type="password"
             placeholder="Password"
@@ -46,38 +48,19 @@
   </NuxtLayout>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { definePageMeta, useAuth } from "#imports";
 
-const router = useRouter();
-const credentials = ref({
-  username: "",
-  password: "",
+const { signIn, token, data, status, lastRefreshedAt } = useAuth();
+
+const username = ref("");
+const password = ref("");
+
+definePageMeta({
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: "/",
+  },
 });
-
-const login = async () => {
-  try {
-    const response = await fetch("http://localhost:3001/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credentials.value),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to login");
-    }
-
-    const data = await response.json();
-    console.log(data);
-
-    localStorage.setItem("authToken", data.token);
-
-    router.push("/");
-  } catch (error) {
-    console.error("Error during login:", error);
-  }
-};
 </script>
