@@ -1,5 +1,5 @@
 <template>
-  <!-- <NuxtLayout name="default"> -->
+  <NuxtLayout name="default">
   <div class="container mx-auto p-4">
     <h1 class="text-xl font-bold mb-4">States List</h1>
     <div class="mb-4">
@@ -53,7 +53,7 @@
       </table>
     </div>
   </div>
-<!-- </NuxtLayout> -->
+</NuxtLayout>
 </template>
 
 <script setup>
